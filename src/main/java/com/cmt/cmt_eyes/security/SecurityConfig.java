@@ -33,19 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()// HTTP 요청 보안설정
-                .antMatchers("/login").permitAll()
+                .antMatchers("/user/login").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
-                .loginPage("/login")
-                .usernameParameter("user_id")
-                .passwordParameter("user_pw")
+                .loginPage("/user/login")
+                .usernameParameter("userId")
+                .passwordParameter("userPw")
                 .defaultSuccessUrl("/");
 //                .permitAll();
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//로그아웃 경로
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/user/login")
                 .invalidateHttpSession(true); //로그아웃 성공 시 세션 제거
 
         http.exceptionHandling()//권한이 없는 사용자가 접근했을 경우 이동할 경로
