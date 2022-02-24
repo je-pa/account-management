@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +25,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { //사용자의 권한을 콜렉션 형태로 반환 (클래스 자료형은 GrantedAuthority를 구현해야함)
         Set<GrantedAuthority> userSortId = new HashSet<>();
-        userSortId.add(new SimpleGrantedAuthority(Integer.toString(user.getUserSortId())));
+        userSortId.add(new SimpleGrantedAuthority("ROLE_"+user.getUserSortId()));
         return userSortId;
+//        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+user.getUserSortId()));
     }
 
     @Override

@@ -24,6 +24,7 @@ public class UserController {
     public void login(UserEntity userEntity){
         System.out.println(passwordEncoder.encode("1"));
     }
+
     @GetMapping("/management")
     public void management(Model model){
         UserEntity[] list = userService.allUser();

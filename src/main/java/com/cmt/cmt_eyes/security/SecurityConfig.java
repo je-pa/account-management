@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity // 시큐리티 필터 등록
@@ -23,6 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public SpringSecurityDialect springSecurityDialect(){
+        return new SpringSecurityDialect();
     }
 
     @Override //인증 대상에서 제외
@@ -48,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/user/login")
                 .invalidateHttpSession(true); //로그아웃 성공 시 세션 제거
 
-        http.exceptionHandling()//권한이 없는 사용자가 접근했을 경우 이동할 경로
-                .accessDeniedPage("/login");
+//        http.exceptionHandling()//권한이 없는 사용자가 접근했을 경우 이동할 경로
+//                .accessDeniedPage("/login");
     }
 
     @Override //사용자 인증

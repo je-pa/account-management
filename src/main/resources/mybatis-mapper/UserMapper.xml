@@ -11,11 +11,17 @@
     <select id="selUser" resultType="UserEntity">
         SELECT *
         FROM user
-        WHERE user_id = #{userId}
+        WHERE user_id = #{userId} AND approval is not null
     </select>
     <select id="selUserList" resultType="UserEntity">
         SELECT *
         FROM user
-        WHERE user_sort_id = #{userSortId}
+        WHERE
+            <if test="userSortId != null and userSortId != ''">
+                user_sort_id = #{userSortId}
+            </if>
+            <if test="customerCompany != null and customerCompany != ''">
+                customer_company = #{customerCompany}
+            </if>
     </select>
 </mapper>
