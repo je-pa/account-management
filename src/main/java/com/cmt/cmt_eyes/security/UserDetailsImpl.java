@@ -32,6 +32,9 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() { //사용자의 password를 반환
+        if(user==null){
+            return "";
+        }
         return user.getUserPw();
     }
 

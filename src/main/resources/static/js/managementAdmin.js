@@ -7,14 +7,30 @@ userSortRadio.forEach(e=>{
     })
 })
 
-getUserListAjax('2');
-
 function getUserListAjax(checkedUserSort){
     fetch(`userList?userSortId=${checkedUserSort}`)
         .then(res=>res.json())
         .then(myJson=>{
             console.log(myJson);
             makeUserListTable(checkedUserSort,myJson);
+        })
+}
+
+function approvalUserAjax(userId){
+    fetch(`/user/approval?userId=${userId}`)
+        .then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
+            if(myJson==true){
+                resetPwAjax(userId);
+            }
+        })
+}
+function resetPwAjax(userId){
+    fetch(`/user/resetPw?userId=${userId}`)
+        .then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
         })
 }
 
@@ -29,27 +45,27 @@ function makeUserListTable(checkedUserSort,userList){
     const emailTh = document.createElement('th');
     const approvalTh = document.createElement('th');
 
-    nameTh.innerHTML='이름';
-    idTh.innerHTML='ID';
-    emailTh.innerHTML='이메일';
-    approvalTh.innerHTML='승인여부';
+    userInnerHtml(nameTh,'이름');
+    userInnerHtml(idTh,'ID');
+    userInnerHtml(emailTh,'이메일');
+    userInnerHtml(approvalTh,'승인여부');
 
     theadTrOfUserTable.append(nameTh);
     theadTrOfUserTable.append(idTh);
     switch (checkedUserSort){
         case '2':
             const representativeTh = document.createElement('th');
-            representativeTh.innerHTML='대표자';
+            userInnerHtml(representativeTh,'대표자');
             theadTrOfUserTable.append(representativeTh);
             break;
         case '3':
             const customerCompanyTh = document.createElement('th');
-            customerCompanyTh.innerHTML='소속회사';
+            userInnerHtml(customerCompanyTh,'소속회사');
             theadTrOfUserTable.append(customerCompanyTh);
             break;
         case '4':
             const departmentTh = document.createElement('th');
-            departmentTh.innerHTML='부서';
+            userInnerHtml(departmentTh,'부서');
             theadTrOfUserTable.append(departmentTh);
             break;
     }
@@ -67,13 +83,65 @@ function makeUserListTable(checkedUserSort,userList){
         const emailTd = document.createElement('td');
         const approvalTd = document.createElement('td');
 
-        nameTd.innerHTML=`${e.userName}`;
-        idTd.innerHTML=`${e.userId}`;
-        emailTd.innerHTML=`${e.email}`;
+        userInnerHtml(nameTd,`${e.userName}`);
+        userInnerHtml(idTd,`${e.userId}`);
+        userInnerHtml(emailTd,`${e.email}`);
+
+        if(`${e.approval}`=='null'){
+            approvalTd.innerHTML=`<a class="approval_button">승인하기</a>`;
+            approvalTd.addEventListener('click',()=>{
+                approvalUserAjax(`${e.userId}`);
+                console.log('1');
+            })
+        }else{
+            approvalTd.innerHTML='승인';
+        }
 
         tr.append(nameTd);
         tr.append(idTd);
+        switch (checkedUserSort){
+            case '2':
+                const representativeTd = document.createElement('td');
+                userInnerHtml(representativeTd,`${e.representative}`);
+                tr.append(representativeTd);
+                break;
+            case '3':
+                const customerCompanyTd = document.createElement('td');
+                userInnerHtml(customerCompanyTd,`${e.customerCompany}`);
+                tr.append(customerCompanyTd);
+                break;
+            case '4':
+                const departmentTd = document.createElement('td');
+                userInnerHtml(departmentTd,`${e.department}`);
+                tr.append(departmentTd);
+                break;
+        }
+        tr.append(emailTd);
+        tr.append(approvalTd);
 
         tbodyOfUserTable.append(tr);
     })
 }
+
+function userInnerHtml(cont, elem){
+    if(elem==null || elem =='null'){
+        return;
+    }
+    cont.innerHTML=elem;
+}
+
+getUserListAjax('2');
+
+// function approvalUserAjax(userId){
+//     let user={
+//         userId:userId ,
+//     }
+//     fetch('/user/approval',{
+//         method: 'POST',
+//         headers:{"Content-Type":"application/json; charset=utf-8"},
+//         body: JSON.stringify(user)
+//     }).then(response => response.json())
+//         .then(myJson => {
+//             console.log(":: "+myJson)
+//         })
+// }

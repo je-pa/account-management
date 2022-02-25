@@ -42,16 +42,32 @@ function makeUserListTable(userList){
 
         const nameTd = document.createElement('td');
         const idTd = document.createElement('td');
+        const departmentTd = document.createElement('td');
         const emailTd = document.createElement('td');
         const approvalTd = document.createElement('td');
 
-        nameTd.innerHTML=`${e.userName}`;
-        idTd.innerHTML=`${e.userId}`;
-        emailTd.innerHTML=`${e.email}`;
+        userInnerHtml(nameTd,`${e.userName}`);
+        userInnerHtml(idTd,`${e.userId}`);
+        userInnerHtml(departmentTd,`${e.department}`);
+        userInnerHtml(emailTd,`${e.email}`);
+
+        if(`${e.approval}`=='null'){
+            approvalTd.innerHTML='승인안됨';
+        }else{
+            approvalTd.innerHTML='승인';
+        }
 
         tr.append(nameTd);
         tr.append(idTd);
-
+        tr.append(departmentTd);
+        tr.append(emailTd);
+        tr.append(approvalTd);
         tbodyOfUserTable.append(tr);
     })
+}
+function userInnerHtml(cont, elem){
+    if(elem==null || elem =='null'){
+        return;
+    }
+    cont.innerHTML=elem;
 }

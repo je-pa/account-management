@@ -24,4 +24,14 @@
                 customer_company = #{customerCompany}
             </if>
     </select>
+    <update id="approvalUser">
+        UPDATE user
+        SET approval = now()
+        WHERE user_id = #{userId}
+    </update>
+    <update id="updatePw">
+        UPDATE user
+        SET user_pw = #{userPw}
+        WHERE user_id = #{userId} AND approval is not null
+    </update>
 </mapper>

@@ -25,6 +25,9 @@ public class UserEntity {
     private String approval;
     private String reportingDate;
 
+    public UserEntity() {
+    }
+
     public String getUserId() {
         return userId;
     }

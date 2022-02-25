@@ -6,6 +6,8 @@
 </head>
 <body>
   <h3>login</h3>
+  <th:block th:if="${param.error}">아이디 또는 비밀번호를 다시 확인해주세요.</th:block>
+  <br>
   <form th:action="@{login}" method="post" th:object="${userEntity}">
     <input type="text" th:field="*{userId}" placeholder="id" required>
     <input type="password" th:field="*{userPw}" placeholder="password" required>
