@@ -6,7 +6,7 @@ console.log(loginCompanyName);
 getUserListAjax();
 
 function getUserListAjax(){
-    fetch(`userList?customerCompany=${loginCompanyName}`)
+    fetch(`userList?company=${loginCompanyName}`)
         .then(res=>res.json())
         .then(myJson=>{
             console.log(myJson);
@@ -39,7 +39,10 @@ function makeUserListTable(userList){
 
     userList.forEach(e=>{
         const tr = document.createElement('tr');
-
+        tr.onclick=function (){
+            console.log("cl");
+            window.location.href=`/user?userId=${e.userId}`;
+        }
         const nameTd = document.createElement('td');
         const idTd = document.createElement('td');
         const departmentTd = document.createElement('td');

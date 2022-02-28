@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>상세</title>
+    <script sec:authorize="hasRole('1')" defer src="/js/detail.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <table>
+        <thead>
+            기본정보
+        </thead>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td class="userId" th:text="${userEntity.userId}"></td>
+            </tr>
+            <tr>
+                <th>회사명</th>
+                <td th:text="${userEntity.company}"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td th:text="${userEntity.userName}"></td>
+            </tr>
+            <tr>
+                <th>e-mail</th>
+                <td th:text="${userEntity.email}"></td>
+            </tr>
+            <tr>
+                <th>비밀번호</th>
+                <td><button class="reset_pw_button" th:if="${userEntity.approval != null}">비밀번호 초기화</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/user/management">목록</a>
+</body>
+</html>

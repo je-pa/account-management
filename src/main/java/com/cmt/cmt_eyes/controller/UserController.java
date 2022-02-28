@@ -25,6 +25,18 @@ public class UserController {
         UserEntity[] list = userService.allUser();
         model.addAttribute("users",list);
     }
+
+    @GetMapping("/create")
+    public void create(UserEntity userEntity, Model model){
+        model.addAttribute("companys" , userService.selCompanyList());
+    }
+
+    @GetMapping("")
+    public String userDetail(UserEntity userEntity, Model model){
+        model.addAttribute("userEntity",userService.selUser(userEntity));
+        return "user/detail";
+    }
+
     @ResponseBody
     @GetMapping("/userList")
     public UserEntity[] selUserList(UserEntity param){

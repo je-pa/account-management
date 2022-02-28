@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>생성</title>
+    <script defer src="/js/create.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <form th:action="@{create}" method="post" th:object="${userEntity}">
+        <table>
+            <thead>
+            기본정보
+            </thead>
+            <tbody>
+                <tr>
+                    <th>신청자</th>
+                    <td th:with="auth=${#authentication.getPrincipal().getUser()}" th:text="${auth.userId}"></td>
+                </tr>
+                <tr sec:authorize="hasRole('1')">
+                    <th>계정분류</th>
+                    <td>
+                        <label><input type="radio" th:field="*{userSortId}" value="2" checked>고객사</label>
+                        <label><input type="radio" th:field="*{userSortId}" value="3">고객</label>
+                        <label><input type="radio" th:field="*{userSortId}" value="4">직원</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <td>
+                        <input type="text" th:field="*{userId}" placeholder="ID" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이름(회사명)</th>
+                    <td>
+                        <input type="text" th:field="*{userName}" placeholder="이름(회사명)" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>e-mail</th>
+                    <td>
+                        <input type="text" th:field="*{email}" placeholder="e-mail" required>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="info_input_table">
+<!--            <thead>-->
+<!--                고객사 정보-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                <tr>-->
+<!--                    <th>대표자</th>-->
+<!--                    <td>-->
+<!--                        <input type="text" th:field="*{representative}" placeholder="대표자">-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th>연락처</th>-->
+<!--                    <td>-->
+<!--                        <input type="text" th:field="*{contact}" placeholder="연락처">-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th>비고</th>-->
+<!--                    <td>-->
+<!--                        <input type="text" th:field="*{note}" placeholder="비고">-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </tbody>-->
+        </table>
+
+        <table>
+            <thead>
+                고객 정보
+            </thead>
+            <tbody>
+                <tr>
+                    <th>소속회사</th>
+                    <td>
+                        <select th:field="*{company}">
+<!--                            <option selected>-</option>-->
+                            <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userId}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>부서</th>
+                    <td>
+                        <input type="text" th:field="*{department}" placeholder="부서">
+                    </td>
+                </tr>
+                <tr>
+                    <th>직급</th>
+                    <td>
+                        <input type="text" th:field="*{position}" placeholder="직급">
+                    </td>
+                </tr>
+                <tr>
+                    <th>연락처</th>
+                    <td>
+                        <input type="text" th:field="*{contact}" placeholder="연락처">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비고</th>
+                    <td>
+                        <input type="text" th:field="*{note}" placeholder="비고">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                직원 정보
+            </thead>
+            <tbody>
+                <tr>
+                    <th>부서</th>
+                    <td>
+                        <input type="text" th:field="*{department}" placeholder="부서">
+                    </td>
+                </tr>
+                <tr>
+                    <th>직급</th>
+                    <td>
+                        <input type="text" th:field="*{position}" placeholder="직급">
+                    </td>
+                </tr>
+                <tr>
+                    <th>연락처</th>
+                    <td>
+                        <input type="text" th:field="*{contact}" placeholder="연락처">
+                    </td>
+                </tr>
+                <tr>
+                    <th>비고</th>
+                    <td>
+                        <input type="text" th:field="*{note}" placeholder="비고">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="생성">
+    </form>
+</body>
+</html>

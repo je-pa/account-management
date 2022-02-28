@@ -59,9 +59,9 @@ function makeUserListTable(checkedUserSort,userList){
             theadTrOfUserTable.append(representativeTh);
             break;
         case '3':
-            const customerCompanyTh = document.createElement('th');
-            userInnerHtml(customerCompanyTh,'소속회사');
-            theadTrOfUserTable.append(customerCompanyTh);
+            const companyTh = document.createElement('th');
+            userInnerHtml(companyTh,'소속회사');
+            theadTrOfUserTable.append(companyTh);
             break;
         case '4':
             const departmentTh = document.createElement('th');
@@ -81,6 +81,9 @@ function makeUserListTable(checkedUserSort,userList){
         const nameTd = document.createElement('td');
         const idTd = document.createElement('td');
         const emailTd = document.createElement('td');
+        moveToDetail(nameTd, e);
+        moveToDetail(idTd, e);
+        moveToDetail(emailTd, e);
         const approvalTd = document.createElement('td');
 
         userInnerHtml(nameTd,`${e.userName}`);
@@ -95,6 +98,7 @@ function makeUserListTable(checkedUserSort,userList){
             })
         }else{
             approvalTd.innerHTML='승인';
+            moveToDetail(approvalTd, e);
         }
 
         tr.append(nameTd);
@@ -103,16 +107,19 @@ function makeUserListTable(checkedUserSort,userList){
             case '2':
                 const representativeTd = document.createElement('td');
                 userInnerHtml(representativeTd,`${e.representative}`);
+                moveToDetail(representativeTd, e);
                 tr.append(representativeTd);
                 break;
             case '3':
-                const customerCompanyTd = document.createElement('td');
-                userInnerHtml(customerCompanyTd,`${e.customerCompany}`);
-                tr.append(customerCompanyTd);
+                const companyTd = document.createElement('td');
+                userInnerHtml(companyTd,`${e.company}`);
+                moveToDetail(companyTd, e);
+                tr.append(companyTd);
                 break;
             case '4':
                 const departmentTd = document.createElement('td');
                 userInnerHtml(departmentTd,`${e.department}`);
+                moveToDetail(departmentTd, e);
                 tr.append(departmentTd);
                 break;
         }
@@ -129,7 +136,12 @@ function userInnerHtml(cont, elem){
     }
     cont.innerHTML=elem;
 }
-
+function moveToDetail(element ,e){
+    element.onclick = function (){
+        console.log("cl");
+        window.location.href=`/user?userId=${e.userId}`;
+    }
+}
 getUserListAjax('2');
 
 // function approvalUserAjax(userId){

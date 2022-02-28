@@ -19,6 +19,10 @@ public class UserService {
         return userRepository.allUser();
     }
 
+    public UserEntity selUser(UserEntity param){
+        return userRepository.selUser(param);
+    }
+
     public UserEntity[] selUserList(UserEntity param) {
         return userRepository.selUserList(param);
     }
@@ -44,5 +48,9 @@ public class UserService {
             return randomNum;
         }
         return "비번초기화 실패";
+    }
+
+    public UserEntity[] selCompanyList() {
+        return userRepository.selCompanyList();
     }
 }

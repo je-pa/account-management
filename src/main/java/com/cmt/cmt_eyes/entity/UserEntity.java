@@ -15,7 +15,7 @@ public class UserEntity {
     private int userSortId;
     private String userName;
     private String email;
-    private String customerCompany;
+    private String company;
     private String department;
     private String position;
     private String contact;
@@ -84,12 +84,12 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getCustomerCompany() {
-        return customerCompany;
+    public String getCompany() {
+        return company;
     }
 
-    public void setCustomerCompany(String customerCompany) {
-        this.customerCompany = customerCompany;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getDepartment() {
