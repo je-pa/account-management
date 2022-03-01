@@ -1,24 +1,22 @@
 package com.cmt.cmt_eyes.security;
 
-import com.cmt.cmt_eyes.entity.UserEntity;
-import lombok.Getter;
+import com.cmt.cmt_eyes.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailsImpl implements UserDetails {
-    private UserEntity user;
+    private UserDto user;
 
-    public UserEntity getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public UserDetailsImpl(UserEntity user) { //로컬로 로그인할때
+    public UserDetailsImpl(UserDto user) { //로컬로 로그인할때
         this.user = user;
     }
     //계정이 갖고있는 권한 목록

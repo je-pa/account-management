@@ -1,6 +1,7 @@
 package com.cmt.cmt_eyes.service;
 
-import com.cmt.cmt_eyes.entity.UserEntity;
+import com.cmt.cmt_eyes.dto.UserDto;
+import com.cmt.cmt_eyes.entity.PwReseted;
 import com.cmt.cmt_eyes.repository.UserRepository;
 import com.cmt.cmt_eyes.security.AuthenticationInformation;
 import com.cmt.cmt_eyes.security.MySecurityUtils;
@@ -15,19 +16,19 @@ public class UserService {
     @Autowired MySecurityUtils mySecurityUtils;
     @Autowired PasswordEncoder passwordEncoder;
 
-    public UserEntity[] allUser(){
+    public UserDto[] allUser(){
         return userRepository.allUser();
     }
 
-    public UserEntity selUser(UserEntity param){
+    public UserDto selUser(UserDto param){
         return userRepository.selUser(param);
     }
 
-    public UserEntity[] selUserList(UserEntity param) {
+    public UserDto[] selUserList(UserDto param) {
         return userRepository.selUserList(param);
     }
 
-    public boolean approval(UserEntity param) {
+    public boolean approval(UserDto param) {
         if(authenticationInformation.getLoginUserSortId()!=1){
             return false;
         }
@@ -38,19 +39,36 @@ public class UserService {
         return false;
     }
 
-    public String resetPw(UserEntity param) {
+    public String resetPw(UserDto param) {
         if(authenticationInformation.getLoginUserSortId()!=1){
             return "권한없음";
         }
         String randomNum = mySecurityUtils.getRandomDigit(5);
         param.setUserPw(passwordEncoder.encode(randomNum));
+        param.setPwReseted(PwReseted.N);
         if(userRepository.updatePw(param)==1){
             return randomNum;
         }
         return "비번초기화 실패";
     }
 
-    public UserEntity[] selCompanyList() {
+    public void updatePw(UserDto userDto){
+        UserDto loginUser = authenticationInformation.getLoginUser();
+        userDto.setPwReseted(PwReseted.Y);
+        String encoded = passwordEncoder.encode(userDto.getUserPw());
+        userDto.setUserPw(encoded);
+        userDto.setUserId(loginUser.getUserId());
+        if(userRepository.updatePw(userDto)==1){
+            loginUser.setUserPw(encoded);
+            loginUser.setPwReseted(PwReseted.Y);
+        }
+    }
+
+    public boolean chkOldPw(String oldPw){
+        return passwordEncoder.matches(oldPw,authenticationInformation.getLoginUser().getUserPw());
+    }
+
+    public UserDto[] selCompanyList() {
         return userRepository.selCompanyList();
     }
 }

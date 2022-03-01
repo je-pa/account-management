@@ -1,17 +1,17 @@
 package com.cmt.cmt_eyes.repository;
 
-import com.cmt.cmt_eyes.entity.UserEntity;
+import com.cmt.cmt_eyes.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserRepository {
-    UserEntity[] allUser();
-    UserEntity loginUser(UserEntity param);
-    UserEntity selUser(UserEntity param);
+    UserDto[] allUser();
+    UserDto loginUser(UserDto param);
+    UserDto selUser(UserDto param);
 
-    UserEntity[] selUserList(UserEntity param);
-    UserEntity[] selCompanyList();
+    UserDto[] selUserList(UserDto param);
+    UserDto[] selCompanyList();
 
-    int approvalUser(UserEntity param);
-    int updatePw(UserEntity param);
+    int approvalUser(UserDto param);
+    int updatePw(UserDto param);
 }

@@ -15,23 +15,23 @@
         <tbody>
             <tr>
                 <th>ID</th>
-                <td class="userId" th:text="${userEntity.userId}"></td>
+                <td class="userId" th:text="${userDto.userId}"></td>
             </tr>
             <tr>
                 <th>회사명</th>
-                <td th:text="${userEntity.company}"></td>
+                <td th:text="${userDto.company}"></td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td th:text="${userEntity.userName}"></td>
+                <td th:text="${userDto.userName}"></td>
             </tr>
             <tr>
                 <th>e-mail</th>
-                <td th:text="${userEntity.email}"></td>
+                <td th:text="${userDto.email}"></td>
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><button class="reset_pw_button" th:if="${userEntity.approval != null}">비밀번호 초기화</button></td>
+                <td><button class="reset_pw_button" th:if="${userDto.approval != null}">비밀번호 초기화</button></td>
             </tr>
         </tbody>
     </table>

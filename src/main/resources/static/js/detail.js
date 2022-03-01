@@ -10,8 +10,10 @@ function resetPwAjax(userId){
             console.log(":: "+myJson)
         })
 }
+if(resetPwButton){
+    resetPwButton.addEventListener('click',()=>{
+        resetPwAjax(userId.innerText);
+    } )
+}
 
-resetPwButton.addEventListener('click',()=>{
-    resetPwAjax(userId.innerText);
-} )
 
