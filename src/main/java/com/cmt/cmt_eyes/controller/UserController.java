@@ -88,4 +88,10 @@ public class UserController {
     public String resetPw(UserDto param){
         return userService.resetPw(param);
     }
+
+    @ResponseBody
+    @PostMapping("/approval")
+    public boolean approval2(UserDto param){
+        return false;
+    }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body><table>
+    <thead>
+    <th class="more_info_th hide">고객사 정보</th>
+    <th class="more_info_th hide">고객 정보</th>
+    <th class="more_info_th hide">직원 정보</th>
+    </thead>
+    <tbody>
+    <tr class="more_info_tr hide">
+        <th>대표자</th>
+        <td>
+            <input type="text" th:field="*{representative}" placeholder="대표자">
+        </td>
+    </tr>
+    <tr class="more_info_tr hide">
+        <th>소속회사</th>
+        <td>
+            <select th:field="*{company}">
+                <option selected value="">-</option>
+                <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
+            </select>
+        </td>
+    </tr>
+    <tr class="more_info_tr hide">
+        <th>부서</th>
+        <td>
+            <input type="text" th:field="*{department}" placeholder="부서">
+        </td>
+    </tr>
+    <tr class="more_info_tr hide">
+        <th>직급</th>
+        <td>
+            <input type="text" th:field="*{position}" placeholder="직급">
+        </td>
+    </tr>
+    <tr class="more_info_tr hide">
+        <th>연락처</th>
+        <td>
+            <input type="text" th:field="*{contact}" placeholder="연락처">
+        </td>
+    </tr>
+    <tr class="more_info_tr hide">
+        <th>비고</th>
+        <td>
+            <input type="text" th:field="*{note}" placeholder="비고">
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

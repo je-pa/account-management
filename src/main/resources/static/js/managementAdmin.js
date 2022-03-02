@@ -16,16 +16,16 @@ function getUserListAjax(checkedUserSort){
         })
 }
 
-function approvalUserAjax(userId){
-    fetch(`/user/approval?userId=${userId}`)
-        .then(response => response.json())
-        .then(myJson => {
-            console.log(":: "+myJson)
-            if(myJson==true){
-                resetPwAjax(userId);
-            }
-        })
-}
+// function approvalUserAjax(userId){
+//     fetch(`/user/approval?userId=${userId}`)
+//         .then(response => response.json())
+//         .then(myJson => {
+//             console.log(":: "+myJson)
+//             if(myJson==true){
+//                 resetPwAjax(userId);
+//             }
+//         })
+// }
 function resetPwAjax(userId){
     fetch(`/user/resetPw?userId=${userId}`)
         .then(response => response.json())
@@ -144,16 +144,16 @@ function moveToDetail(element ,e){
 }
 getUserListAjax('2');
 
-// function approvalUserAjax(userId){
-//     let user={
-//         userId:userId ,
-//     }
-//     fetch('/user/approval',{
-//         method: 'POST',
-//         headers:{"Content-Type":"application/json; charset=utf-8"},
-//         body: JSON.stringify(user)
-//     }).then(response => response.json())
-//         .then(myJson => {
-//             console.log(":: "+myJson)
-//         })
-// }
+function approvalUserAjax(userId){
+    let user={
+        userId:userId ,
+    }
+    fetch('/user/approval',{
+        method: 'POST',
+        headers:{"Content-Type":"application/json; charset=utf-8"},
+        body: JSON.stringify(user)
+    }).then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
+        })
+}

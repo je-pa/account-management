@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()// HTTP 요청 보안설정
                 .antMatchers("/user/login").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated();//권한제한++
 
         http.formLogin()
                 .loginPage("/user/login")
@@ -55,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.exceptionHandling()//권한이 없는 사용자가 접근했을 경우 이동할 경로
 //                .accessDeniedPage("/login");
+
+        http.csrf().disable();
     }
 
     @Override //사용자 인증
