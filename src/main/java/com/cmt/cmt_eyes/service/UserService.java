@@ -16,8 +16,12 @@ public class UserService {
     @Autowired MySecurityUtils mySecurityUtils;
     @Autowired PasswordEncoder passwordEncoder;
 
-    public UserDto[] allUser(){
-        return userRepository.allUser();
+//    public UserDto[] allUser(){
+//        return userRepository.allUser();
+//    }
+    public int createUser(UserDto userDto){
+        userDto.setApplicant(authenticationInformation.getLoginUser().getUserId());
+        return userRepository.createUser(userDto);
     }
 
     public UserDto selUser(UserDto param){

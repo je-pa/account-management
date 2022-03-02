@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserRepository {
+    int createUser(UserDto param);
+
     UserDto[] allUser();
     UserDto loginUser(UserDto param);
     UserDto selUser(UserDto param);

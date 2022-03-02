@@ -25,24 +25,28 @@
                         <label><input type="radio" th:field="*{userSortId}" value="2">고객사</label>
                         <label><input type="radio" th:field="*{userSortId}" value="3">고객</label>
                         <label><input type="radio" th:field="*{userSortId}" value="4">직원</label>
+                        <p class="err-txt" th:if="${#fields.hasErrors('userSortId')}" th:errors="*{userSortId}"></p>
                     </td>
                 </tr>
                 <tr>
                     <th>ID</th>
                     <td>
-                        <input type="text" th:field="*{userId}" placeholder="ID" required>
+                        <input type="text" th:field="*{userId}" placeholder="ID">
+                        <p class="err-txt" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
                     </td>
                 </tr>
                 <tr>
                     <th>이름(회사명)</th>
                     <td>
-                        <input type="text" th:field="*{userName}" placeholder="이름(회사명)" required>
+                        <input type="text" th:field="*{userName}" placeholder="이름(회사명)">
+                        <p class="err-txt" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
                     </td>
                 </tr>
                 <tr>
                     <th>e-mail</th>
                     <td>
-                        <input type="text" th:field="*{email}" placeholder="e-mail" required>
+                        <input type="text" th:field="*{email}" placeholder="e-mail">
+                        <p class="err-txt" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </td>
                 </tr>
             </tbody>
@@ -83,8 +87,8 @@
                     <th>소속회사</th>
                     <td>
                         <select th:field="*{company}">
-<!--                            <option selected>-</option>-->
-                            <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userId}"></option>
+                            <option selected value="">-</option>
+                            <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
                         </select>
                     </td>
                 </tr>
@@ -145,8 +149,8 @@
                 </tr>
             </tbody>
         </table>
-        <p class="err-txt" th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}">Incorrect date</p>
         <input type="submit" value="생성">
     </form>
+    <a href="/user/management">목록</a>
 </body>
 </html>

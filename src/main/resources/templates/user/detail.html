@@ -10,7 +10,7 @@
 <body>
     <table>
         <thead>
-            기본정보
+            <th>기본정보</th>
         </thead>
         <tbody>
             <tr>
@@ -36,6 +36,95 @@
         </tbody>
     </table>
 
+    <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==2}">
+        <thead>
+            <th>고객사 정보</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>대표자</th>
+                <td class="userId" th:text="${userDto.representative}"></td>
+            </tr>
+            <tr>
+                <th>연락처</th>
+                <td th:text="${userDto.contact}"></td>
+            </tr>
+            <tr>
+                <th>비고</th>
+                <td th:text="${userDto.note}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==3}">
+        <thead>
+            <th>고객 정보</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>소속회사</th>
+                <td class="userId" th:text="${userDto.company}"></td>
+            </tr>
+            <tr>
+                <th>부서</th>
+                <td th:text="${userDto.department}"></td>
+            </tr>
+            <tr>
+                <th>연락처</th>
+                <td th:text="${userDto.contact}"></td>
+            </tr>
+            <tr>
+                <th>비고</th>
+                <td th:text="${userDto.note}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==4}">
+        <thead>
+        <th>직원 정보</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>부서</th>
+                <td class="userId" th:text="${userDto.department}"></td>
+            </tr>
+            <tr>
+                <th>직급</th>
+                <td th:text="${userDto.position}"></td>
+            </tr>
+            <tr>
+                <th>연락처</th>
+                <td th:text="${userDto.contact}"></td>
+            </tr>
+            <tr>
+                <th>비고</th>
+                <td th:text="${userDto.note}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table sec:authorize="hasRole('2')" th:if="${userDto.userSortId==3}">
+        <thead>
+        <th>직원 정보</th>
+        </thead>
+        <tbody>
+        <tr>
+            <th>부서</th>
+            <td class="userId" th:text="${userDto.department}"></td>
+        </tr>
+        <tr>
+            <th>직급</th>
+            <td th:text="${userDto.position}"></td>
+        </tr>
+        <tr>
+            <th>연락처</th>
+            <td th:text="${userDto.contact}"></td>
+        </tr>
+        <tr>
+            <th>비고</th>
+            <td th:text="${userDto.note}"></td>
+        </tr>
+        </tbody>
+    </table>
     <a href="/user/management">목록</a>
 </body>
 </html>

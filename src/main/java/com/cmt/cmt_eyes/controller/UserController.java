@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +25,8 @@ public class UserController {
 
     @GetMapping("/management")
     public void management(Model model){
-        UserDto[] list = userService.allUser();
-        model.addAttribute("users",list);
+//        UserDto[] list = userService.allUser();
+//        model.addAttribute("users",list);
     }
 
     @GetMapping("/create")
@@ -35,21 +36,21 @@ public class UserController {
 
     @GetMapping("")
     public String userDetail(UserDto userDto, Model model){
-        model.addAttribute("userEntity",userService.selUser(userDto));
+        model.addAttribute("userDto",userService.selUser(userDto));
         return "user/detail";
     }
 
     @PostMapping("/create")
-    public String userCreate(@Valid UserDto userDto, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){ //뭐가 틀렸는지
-            return "user/create";
+    public String userCreate(@Validated(UserDto.UserCreateValidationGroup.class) UserDto userDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "redirect:/user/create";
         }
-
+        userService.createUser(userDto);
         return "user/management";
     }
 
     @PostMapping("/changePw")
-    public String changePw(@Valid UserDto userDto, BindingResult bindingResult, HttpServletRequest httpServletRequest){
+    public String changePw(@Validated(UserDto.PwValidationGroup.class) UserDto userDto, BindingResult bindingResult, HttpServletRequest httpServletRequest){
         String pwChk = httpServletRequest.getParameter("pwChk");
         String oldPw = httpServletRequest.getParameter("oldPw");
         String pw = userDto.getUserPw();

@@ -4,6 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cmt.cmt_eyes.repository.UserRepository">
+    <insert id="createUser">
+        INSERT INTO user
+            (user_id, applicant, user_sort_id, user_name, email, company, department, position, contact, note, representative, reporting_date)
+        VALUES
+            (#{userId}, #{applicant}, #{userSortId}, #{userName}, #{email}, #{company}, #{department}, #{position}, #{contact}, #{note}, #{representative}, now())
+    </insert>
     <select id="allUser" resultType="UserDto">
         SELECT *
         FROM user
