@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      th:replace="~{layout :: layout(~{::title}, ~{::main},~{}, ~{})}"
+>
 <head>
     <meta charset="UTF-8">
     <title>main</title>
 </head>
-<body>
-    <nav>
-        <a href="/">홈</a>
-        <a href="/user/management">계정관리</a>
-    </nav>
-</body>
+<main>
+    <th:block sec:authorize="hasRole('1')">관리자</th:block>
+    <th:block sec:authorize="hasRole('2')" >고객사</th:block>
+    <th:block sec:authorize="hasRole('3')" >고객</th:block>
+    <th:block sec:authorize="hasRole('4')" >직원</th:block>
+    <th:block sec:authorize="isAuthenticated()" >로그인함</th:block>
+    <th:block sec:authorize="isAnonymous()" >로그인안함</th:block>
+    <a th:href="@{/logout}">LOGOUT</a>
+</main>
 </html>

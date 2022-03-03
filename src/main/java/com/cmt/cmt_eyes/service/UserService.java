@@ -1,7 +1,7 @@
 package com.cmt.cmt_eyes.service;
 
 import com.cmt.cmt_eyes.dto.UserDto;
-import com.cmt.cmt_eyes.entity.PwReseted;
+import com.cmt.cmt_eyes.PwReseted;
 import com.cmt.cmt_eyes.repository.UserRepository;
 import com.cmt.cmt_eyes.security.AuthenticationInformation;
 import com.cmt.cmt_eyes.security.MySecurityUtils;

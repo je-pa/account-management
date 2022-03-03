@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout :: layout(~{::title}, ~{::main},~{::link}, ~{::script})}"
+>
 <head>
     <meta charset="UTF-8">
     <title>계정관리</title>
@@ -9,50 +11,30 @@
     <script sec:authorize="hasRole('1')" defer src="/js/managementAdmin.js" type="text/javascript" charset="utf-8"></script>
     <script sec:authorize="hasRole('2')" defer src="/js/managementCompany.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
-    <span class="company_info"
-              sec:authorize="hasRole('2')"
-              th:with="auth=${#authentication.getPrincipal().getUser()}"
-              th:data-user-name="${auth.userName}"
-    />
-    <th:block sec:authorize="hasRole('1')">관리자</th:block>
-    <th:block sec:authorize="hasRole('2')" >고객사</th:block>
-    <th:block sec:authorize="hasRole('3')" >고객</th:block>
-    <th:block sec:authorize="hasRole('4')" >직원</th:block>
-    <th:block sec:authorize="isAuthenticated()" >로그인함</th:block>
-    <th:block sec:authorize="isAnonymous()" >로그인안함</th:block>
-    <a th:href="@{/logout}">LOGOUT</a>
-    <br>
-    <th:block sec:authorize="hasRole('1')">
-        <label><input type="radio" name="userSort" value="2" checked>고객사</label>
-        <label><input type="radio" name="userSort" value="3">고객</label>
-        <label><input type="radio" name="userSort" value="4">직원</label>
-    </th:block>
+<main>
+    <section>
+        <div>
+        <span class="company_info"
+                  sec:authorize="hasRole('2')"
+                  th:with="auth=${#authentication.getPrincipal().getUser()}"
+                  th:data-user-name="${auth.userName}"
+        />
 
-<!--    <table>-->
-<!--        <thead>-->
-<!--            <tr>-->
-<!--                <th>이름</th>-->
-<!--                <th>id</th>-->
-<!--                <th>email</th>-->
-<!--                <th>userSortId</th>-->
-<!--            </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--            <tr onclick="location.href='/'" th:each="user : ${users}">-->
-<!--                <td th:text="${user.userName}"></td>-->
-<!--                <td th:text="${user.userId}"></td>-->
-<!--                <td th:text="${user.email}"></td>-->
-<!--                <td th:text="${user.userSortId}"></td>-->
-<!--            </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-    <table class="user_table">
-        <thead>
-            <tr></tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <th:block sec:authorize="hasAnyRole('1','2')"><a th:href="@{create}">생성</a></th:block>
-</body>
+
+        <br>
+        <th:block sec:authorize="hasRole('1')">
+            <label><input type="radio" name="userSort" value="2" checked>고객사</label>
+            <label><input type="radio" name="userSort" value="3">고객</label>
+            <label><input type="radio" name="userSort" value="4">직원</label>
+        </th:block>
+        <table class="user_table">
+            <thead>
+                <tr></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <th:block sec:authorize="hasAnyRole('1','2')"><a th:href="@{create}">생성</a></th:block>
+        </div>
+    </section>
+</main>
 </html>

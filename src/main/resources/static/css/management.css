@@ -1,5 +1,13 @@
-th, td{ width: 10%; padding: 0; border: 1px solid black; padding: 6px; }
-table { border: 1px solid black; border-collapse: collapse;}
+
+
 .approval_button{ background: #dfe6e9; padding: 3px; border-radius: 7px; }
 .approval_button:hover {  cursor: pointer; filter: brightness(80%);}
 
+main section { width: 1200px; min-height: 850px; background: #FFFFFF; border-radius: 10px; margin: 50px auto;}
+
+main section div { width: 95%; margin: auto; padding: 10px;}
+main section table {  border-collapse: collapse; width: 100%;}
+main section table thead { background: #C4C4C4;}
+main section table thead tr{ height: 50px;}
+main section table tbody tr:hover { background: #F4F4F4;}
+tbody tr{ height: 55px; border-bottom: 1px solid black; text-align: center;}

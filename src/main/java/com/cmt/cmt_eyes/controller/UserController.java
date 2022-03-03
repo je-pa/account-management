@@ -12,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -41,15 +40,16 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String userCreate(@Validated(UserDto.UserCreateValidationGroup.class) UserDto userDto, BindingResult bindingResult){
+    public String userCreate(Model model, @Validated(UserDto.UserCreateValidationGroup.class) UserDto userDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "redirect:/user/create";
+            model.addAttribute("companys" , userService.selCompanyList());
+            return "user/create";
         }
         userService.createUser(userDto);
         return "user/management";
     }
 
-    @PostMapping("/changePw")
+    @PutMapping("/changePw")
     public String changePw(@Validated(UserDto.PwValidationGroup.class) UserDto userDto, BindingResult bindingResult, HttpServletRequest httpServletRequest){
         String pwChk = httpServletRequest.getParameter("pwChk");
         String oldPw = httpServletRequest.getParameter("oldPw");
@@ -77,21 +77,15 @@ public class UserController {
     }
 
     @ResponseBody
-    @GetMapping("/approval")
-    public boolean approval(UserDto param){
+    @PutMapping("/approval")
+    public boolean approval(@RequestBody UserDto param){
         System.out.println("!!!");
         return userService.approval(param);
     }
 
     @ResponseBody
-    @GetMapping("/resetPw")
+    @PutMapping("/resetPw")
     public String resetPw(UserDto param){
         return userService.resetPw(param);
-    }
-
-    @ResponseBody
-    @PostMapping("/approval")
-    public boolean approval2(UserDto param){
-        return false;
     }
 }

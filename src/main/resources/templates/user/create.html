@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout :: layout(~{::title}, ~{::main},~{::link}, ~{::script})}"
 >
 <head>
     <meta charset="UTF-8">
@@ -8,103 +9,138 @@
     <link rel="stylesheet" href="/css/create.css">
     <script defer src="/js/create.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
-    <form th:action="@{create}" method="post" th:object="${userDto}">
-        <table>
-            <thead>
-                <th>기본 정보</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>신청자</th>
-                    <td th:with="auth=${#authentication.getPrincipal().getUser()}" th:text="${auth.userId}"></td>
-                </tr>
-                <tr sec:authorize="hasRole('1')">
-                    <th>계정분류</th>
-                    <td>
-                        <label><input type="radio" th:field="*{userSortId}" value="2">고객사</label>
-                        <label><input type="radio" th:field="*{userSortId}" value="3">고객</label>
-                        <label><input type="radio" th:field="*{userSortId}" value="4">직원</label>
-                        <p class="err-txt" th:if="${#fields.hasErrors('userSortId')}" th:errors="*{userSortId}"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th>ID</th>
-                    <td>
-                        <input type="text" th:field="*{userId}" placeholder="ID">
-                        <p class="err-txt" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th>이름(회사명)</th>
-                    <td>
-                        <input type="text" th:field="*{userName}" placeholder="이름(회사명)">
-                        <p class="err-txt" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <th>e-mail</th>
-                    <td>
-                        <input type="text" th:field="*{email}" placeholder="e-mail">
-                        <p class="err-txt" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table>
-            <thead>
-            <th class="more_info_th hide">고객사 정보</th>
-            <th class="more_info_th hide">고객 정보</th>
-            <th class="more_info_th hide">직원 정보</th>
-            </thead>
-            <tbody>
-            <tr class="more_info_tr hide">
-                <th>대표자</th>
-                <td>
-                    <input type="text" th:field="*{representative}" placeholder="대표자">
-                </td>
-            </tr>
-            <tr class="more_info_tr hide">
-                <th>소속회사</th>
-                <td>
-                    <select th:field="*{company}">
-                        <option selected value="">-</option>
-                        <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
-                    </select>
-                </td>
-            </tr>
-            <tr class="more_info_tr hide">
-                <th>부서</th>
-                <td>
-                    <input type="text" th:field="*{department}" placeholder="부서">
-                </td>
-            </tr>
-            <tr class="more_info_tr hide">
-                <th>직급</th>
-                <td>
-                    <input type="text" th:field="*{position}" placeholder="직급">
-                </td>
-            </tr>
-            <tr class="more_info_tr hide">
-                <th>연락처</th>
-                <td>
-                    <input type="text" th:field="*{contact}" placeholder="연락처">
-                </td>
-            </tr>
-            <tr class="more_info_tr hide">
-                <th>비고</th>
-                <td>
-                    <input type="text" th:field="*{note}" placeholder="비고">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <input type="submit" value="생성">
-    </form>
-    <a href="/user/management">목록</a>
-</body>
+<main>
+    <section>
+        <div>
+            <form th:action="@{create}" method="post" th:object="${userDto}">
+                <input sec:authorize="hasRole('2')" type="hidden" name="userSortId" th:value="3">
+                <input sec:authorize="hasRole('2')" type="hidden" name="company" th:with="auth=${#authentication.getPrincipal().getUser()}" th:value="${auth.userName}">
+                <table>
+                    <thead>
+                        <th>기본 정보</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>신청자</th>
+                            <td th:with="auth=${#authentication.getPrincipal().getUser()}" th:text="${auth.userId}"></td>
+                        </tr>
+                        <tr sec:authorize="hasRole('1')">
+                            <th>계정분류</th>
+                            <td>
+                                <label><input type="radio" th:field="*{userSortId}" value="2">고객사</label>
+                                <label><input type="radio" th:field="*{userSortId}" value="3">고객</label>
+                                <label><input type="radio" th:field="*{userSortId}" value="4">직원</label>
+                                <p class="err-txt" th:if="${#fields.hasErrors('userSortId')}" th:errors="*{userSortId}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <td>
+                                <input type="text" th:field="*{userId}" placeholder="ID">
+                                <p class="err-txt" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이름(회사명)</th>
+                            <td>
+                                <input type="text" th:field="*{userName}" placeholder="이름(회사명)">
+                                <p class="err-txt" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>e-mail</th>
+                            <td>
+                                <input type="text" th:field="*{email}" placeholder="e-mail">
+                                <p class="err-txt" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table sec:authorize="hasRole('1')">
+                    <thead>
+                    <th class="more_info_th hide">고객사 정보</th>
+                    <th class="more_info_th hide">고객 정보</th>
+                    <th class="more_info_th hide">직원 정보</th>
+                    </thead>
+                    <tbody>
+                    <tr class="more_info_tr hide">
+                        <th>대표자</th>
+                        <td>
+                            <input type="text" th:field="*{representative}" placeholder="대표자">
+                        </td>
+                    </tr>
+                    <tr class="more_info_tr hide">
+                        <th>소속회사</th>
+                        <td>
+                            <select th:field="*{company}">
+                                <option selected value="">-</option>
+                                <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="more_info_tr hide">
+                        <th>부서</th>
+                        <td>
+                            <input type="text" th:field="*{department}" placeholder="부서">
+                        </td>
+                    </tr>
+                    <tr class="more_info_tr hide">
+                        <th>직급</th>
+                        <td>
+                            <input type="text" th:field="*{position}" placeholder="직급">
+                        </td>
+                    </tr>
+                    <tr class="more_info_tr hide">
+                        <th>연락처</th>
+                        <td>
+                            <input type="text" th:field="*{contact}" placeholder="연락처">
+                        </td>
+                    </tr>
+                    <tr class="more_info_tr hide">
+                        <th>비고</th>
+                        <td>
+                            <input type="text" th:field="*{note}" placeholder="비고">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table >
+                <table sec:authorize="hasRole('2')">
+                    <thead>
+                    <th>직원 정보</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>부서</th>
+                        <td>
+                            <input type="text" th:field="*{department}" placeholder="부서">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>직급</th>
+                        <td>
+                            <input type="text" th:field="*{position}" placeholder="직급">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td>
+                            <input type="text" th:field="*{contact}" placeholder="연락처">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비고</th>
+                        <td>
+                            <input type="text" th:field="*{note}" placeholder="비고">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="생성">
+            </form>
+            <a href="/user/management">목록</a>
+        </div>
+    </section>
+</main>
 </html>
 
 <!--<table class="moreInfo hide">-->

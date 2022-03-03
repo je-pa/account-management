@@ -26,13 +26,32 @@ function getUserListAjax(checkedUserSort){
 //             }
 //         })
 // }
+function approvalUserAjax(userId){
+    let user={
+        userId:userId ,
+    }
+    fetch('/user/approval',{
+        method: 'PUT',
+        headers:{"Content-Type":"application/json; charset=utf-8"},
+        body: JSON.stringify(user)
+    }).then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
+            if(myJson==true){
+                resetPwAjax(userId);
+            }
+        })
+}
 function resetPwAjax(userId){
-    fetch(`/user/resetPw?userId=${userId}`)
+    fetch(`/user/resetPw?userId=${userId}`,{
+        method: 'PUT',
+    })
         .then(response => response.json())
         .then(myJson => {
             console.log(":: "+myJson)
         })
 }
+
 
 const theadTrOfUserTable = document.querySelector('.user_table thead tr');
 const tbodyOfUserTable = document.querySelector('.user_table tbody');
@@ -91,8 +110,12 @@ function makeUserListTable(checkedUserSort,userList){
         userInnerHtml(emailTd,`${e.email}`);
 
         if(`${e.approval}`=='null'){
-            approvalTd.innerHTML=`<a class="approval_button">승인하기</a>`;
-            approvalTd.addEventListener('click',()=>{
+            // approvalTd.innerHTML=`<a class="approval_button">승인하기</a>`;
+            const approvalButton = document.createElement('a');
+            approvalButton.classList.add('approval_button');
+            approvalButton.innerHTML='승인하기';
+            approvalTd.append(approvalButton);
+            approvalButton.addEventListener('click',()=>{
                 approvalUserAjax(`${e.userId}`);
                 console.log('1');
             })
@@ -144,16 +167,4 @@ function moveToDetail(element ,e){
 }
 getUserListAjax('2');
 
-function approvalUserAjax(userId){
-    let user={
-        userId:userId ,
-    }
-    fetch('/user/approval',{
-        method: 'POST',
-        headers:{"Content-Type":"application/json; charset=utf-8"},
-        body: JSON.stringify(user)
-    }).then(response => response.json())
-        .then(myJson => {
-            console.log(":: "+myJson)
-        })
-}
+

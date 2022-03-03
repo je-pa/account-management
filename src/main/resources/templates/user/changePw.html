@@ -7,6 +7,7 @@
 </head>
 <body>
     <form th:action="@{/user/changePw}" method="post" th:object="${userDto}">
+        <input type="hidden" name="_method" value="PUT"/>
         <input type="password" name="oldPw" placeholder="이전 비밀번호">
         <input type="password" th:field="*{userPw}" placeholder="새 비밀번호">
         <input type="password" name="pwChk" placeholder="새 비밀번호 확인" >

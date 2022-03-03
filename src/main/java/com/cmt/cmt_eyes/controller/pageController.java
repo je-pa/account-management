@@ -1,6 +1,6 @@
 package com.cmt.cmt_eyes.controller;
 
-import com.cmt.cmt_eyes.entity.PwReseted;
+import com.cmt.cmt_eyes.PwReseted;
 import com.cmt.cmt_eyes.dto.UserDto;
 import com.cmt.cmt_eyes.security.AuthenticationInformation;
 import org.springframework.beans.factory.annotation.Autowired;

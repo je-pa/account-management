@@ -1,6 +1,6 @@
 package com.cmt.cmt_eyes.dto;
 
-import com.cmt.cmt_eyes.entity.PwReseted;
+import com.cmt.cmt_eyes.PwReseted;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
