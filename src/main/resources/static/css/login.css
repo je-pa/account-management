@@ -1,0 +1,5 @@
+body{ min-height: 100vh; background: #F8F8FF;}
+main{ min-height: 60vh; width: 500px; margin: auto; text-align: center; display: flex; flex-direction: column; justify-content: center;}
+main img{margin-bottom: 20px;}
+main form{ display: flex; flex-direction: column; gap: 10px;}
+main input{height: 50px; border: 1px solid #C4C4C4; padding:0; }

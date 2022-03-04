@@ -10,4 +10,8 @@ main section table {  border-collapse: collapse; width: 100%;}
 main section table thead { background: #C4C4C4;}
 main section table thead tr{ height: 50px;}
 main section table tbody tr:hover { background: #F4F4F4;}
+table {margin-bottom: 20px;}
 tbody tr{ height: 55px; border-bottom: 1px solid black; text-align: center;}
+main section div{ position: relative;}
+main section div > a{ all: unset; display: block; position: absolute; right:10px; background: #D9D9D9; border: 1px solid #C4C4C4; padding: 2px 4px; border-radius: 4px;}
+main section div > a:hover{ cursor: pointer;}

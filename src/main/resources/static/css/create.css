@@ -5,6 +5,13 @@ main section div { width: 95%; margin: auto; padding: 10px;}
 main section table {  border-collapse: collapse; width: 100%;}
 main section table thead { height: 50px; text-align: left; border-bottom: 2px solid black;}
 main section table thead tr th{ font-size: 18px; }
+main section table input[type="text"]{ width: 65%; height: 35px; background: #D9D9D9; border: 1px solid #C4C4C4;}
+main section table select {height: 35px; min-width: 92px; background: #D9D9D9; border: 1px solid #C4C4C4;}
 
+.button_list{ display: flex; gap: 3px; justify-content: flex-end;}
+.button_list a, .button_list input{ all: unset; }
+.button_list a:hover, .button_list input:hover{ cursor: pointer;}
+.button_list li{background: #D9D9D9; border: 1px solid #C4C4C4; padding: 2px 4px; border-radius: 4px; }
 tbody th { width: 18%; text-align: right; padding-right: 28px;}
 tbody tr{ height: 55px; border-bottom: 1px solid black; text-align: left;}
+tbody td{ display: flex; gap: 10px; height: 55px; align-items: center;}

@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>changePw</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/changePw.css">
     <script defer src="/js/changePw.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
+<main>
+    <img src="/img/logo.svg">
     <form th:action="@{/user/changePw}" method="post" th:object="${userDto}">
         <input type="hidden" name="_method" value="PUT"/>
         <input type="password" name="oldPw" placeholder="이전 비밀번호">
@@ -15,7 +19,8 @@
         <p th:if="${param.result != null and param.result[0]=='1'}">새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.</p>
         <p th:if="${param.result != null and param.result[0]=='2'}">현재 비밀번호를 다시 확인해 주세요.</p>
         <p class="err-txt" th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}">Incorrect date</p>
-        <input type="submit" value="수정">
+        <input type="submit" value="비밀번호 변경">
     </form>
+</main>
 </body>
 </html>

@@ -7,12 +7,12 @@
 </head>
 <body>
   <main>
-  <th:block th:if="${param.error}">아이디 또는 비밀번호를 다시 확인해주세요.</th:block>
   <br>
     <img src="/img/logo.svg">
     <form th:action="@{login}" method="post" th:object="${userDto}">
       <input type="text" th:field="*{userId}" placeholder="id" required>
       <input type="password" th:field="*{userPw}" placeholder="password" required>
+      <th:block th:if="${param.error}">아이디 또는 비밀번호를 다시 확인해주세요.</th:block>
       <input type="submit" value="로그인">
     </form>
   </main>

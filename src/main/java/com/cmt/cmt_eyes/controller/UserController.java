@@ -42,6 +42,7 @@ public class UserController {
     @PostMapping("/create")
     public String userCreate(Model model, @Validated(UserDto.UserCreateValidationGroup.class) UserDto userDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
+            userDto.setUserSortId(null);
             model.addAttribute("companys" , userService.selCompanyList());
             return "user/create";
         }

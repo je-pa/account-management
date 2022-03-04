@@ -13,6 +13,6 @@
     <th:block sec:authorize="hasRole('4')" >직원</th:block>
     <th:block sec:authorize="isAuthenticated()" >로그인함</th:block>
     <th:block sec:authorize="isAnonymous()" >로그인안함</th:block>
-    <a th:href="@{/logout}">LOGOUT</a>
+
 </main>
 </html>
