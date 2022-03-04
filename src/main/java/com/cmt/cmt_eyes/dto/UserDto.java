@@ -16,6 +16,7 @@ import javax.validation.constraints.Pattern;
 public class UserDto {
     public interface PwValidationGroup {}
     public interface UserCreateValidationGroup {}
+
     @NotBlank(message = "userId는 필수 입력 값입니다." ,groups = {UserCreateValidationGroup.class})
     private String userId;
 

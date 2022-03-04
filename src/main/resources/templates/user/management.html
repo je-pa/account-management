@@ -18,9 +18,7 @@
                   sec:authorize="hasRole('2')"
                   th:with="auth=${#authentication.getPrincipal().getUser()}"
                   th:data-user-name="${auth.userName}"
-        />
-
-
+        ></span>
         <br>
         <th:block sec:authorize="hasRole('1')">
             <label><input type="radio" name="userSort" value="2" checked>고객사</label>

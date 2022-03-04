@@ -5,7 +5,7 @@ const loginCompanyName = document.querySelector('.company_info').dataset.userNam
 console.log(loginCompanyName);
 getUserListAjax();
 
-function getUserListAjax(){
+let getUserListAjax = function (){
     fetch(`userList?company=${loginCompanyName}`)
         .then(res=>res.json())
         .then(myJson=>{
@@ -69,7 +69,7 @@ function makeUserListTable(userList){
     })
 }
 function userInnerHtml(cont, elem){
-    if(elem==null || elem =='null'){
+    if(elem===null || elem ==='null'){
         return;
     }
     cont.innerHTML=elem;

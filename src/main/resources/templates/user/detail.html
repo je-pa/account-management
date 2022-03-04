@@ -108,6 +108,7 @@
             </table>
             <table sec:authorize="hasRole('2')" th:if="${userDto.userSortId==3}">
                 <thead>
+<!--                맞춰주기//////-->
                 <th>직원 정보</th>
                 </thead>
                 <tbody>
@@ -129,6 +130,7 @@
                 </tr>
                 </tbody>
             </table>
+<!--            th:href="@{}" 쓰기 ////////-->
             <a href="/user/management">목록</a>
         </div>
     </section>
