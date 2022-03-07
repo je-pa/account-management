@@ -5,13 +5,16 @@
 
 main section { width: 1200px; min-height: 850px; background: #FFFFFF; border-radius: 10px; margin: 50px auto;}
 
-main section div { width: 95%; margin: auto; padding: 10px;}
+main section div.table { width: 95%; margin: auto; padding: 10px;}
 main section table {  border-collapse: collapse; width: 100%;}
 main section table thead { background: #C4C4C4;}
 main section table thead tr{ height: 50px;}
 main section table tbody tr:hover { background: #F4F4F4;}
 table {margin-bottom: 20px;}
 tbody tr{ height: 55px; border-bottom: 1px solid black; text-align: center;}
-main section div{ position: relative;}
-main section div > a{ all: unset; display: block; position: absolute; right:10px; background: #D9D9D9; border: 1px solid #C4C4C4; padding: 2px 4px; border-radius: 4px;}
-main section div > a:hover{ cursor: pointer;}
+main section div.table{ position: relative;}
+main section div.table > a{ all: unset; display: block; position: absolute; right:10px; background: #D9D9D9; border: 1px solid #C4C4C4; padding: 2px 4px; border-radius: 4px;}
+main section div.table > a:hover{ cursor: pointer;}
+
+.radios { display: flex; gap: 5px;}
+.page_num { display: flex; gap: 10px; justify-content: center;}

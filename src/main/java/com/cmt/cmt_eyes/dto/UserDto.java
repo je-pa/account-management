@@ -47,5 +47,7 @@ public class UserDto {
     private PwReseted pwReseted;
     private String approval;
     private String reportingDate;
+
+
 }
 

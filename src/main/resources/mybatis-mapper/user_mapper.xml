@@ -27,13 +27,30 @@
     <select id="selUserList" resultType="UserDto">
         SELECT *
         FROM user
+        <if test="userSortId != null or company != null">
         WHERE
             <if test="userSortId != null and userSortId != ''">
                 user_sort_id = #{userSortId}
             </if>
             <if test="company != null and company != ''">
-                company = #{company}
+                AND company = #{company}
             </if>
+        </if>
+        ORDER BY reporting_date DESC
+        LIMIT #{startIdx}, #{limit}
+    </select>
+    <select id="countPage" resultType="PageDto">
+        SELECT CEIL(COUNT(user_id)/#{limit}) AS count
+        FROM user
+        <if test="userSortId != null or company != null">
+            WHERE
+            <if test="userSortId != null and userSortId != ''">
+                user_sort_id = #{userSortId}
+            </if>
+            <if test="company != null and company != ''">
+                AND company = #{company}
+            </if>
+        </if>
     </select>
     <select id="selCompanyList" resultType="UserDto">
         SELECT user_name , user_id

@@ -13,26 +13,49 @@
 </head>
 <main>
     <section>
-        <div>
+        <div class="table">
         <span class="company_info"
                   sec:authorize="hasRole('2')"
                   th:with="auth=${#authentication.getPrincipal().getUser()}"
                   th:data-user-name="${auth.userName}"
         ></span>
         <br>
-        <th:block sec:authorize="hasRole('1')">
-            <label><input type="radio" name="userSort" value="2" checked>고객사</label>
-            <label><input type="radio" name="userSort" value="3">고객</label>
-            <label><input type="radio" name="userSort" value="4">직원</label>
-        </th:block>
+        <ul sec:authorize="hasRole('1')" class="radios">
+            <li><input th:attr="onclick=|moveToUserSortIdPage('all')|" type="radio" name="userSort">전체</li>
+            <li><input th:attr="onclick=|moveToUserSortIdPage('2')|" type="radio" name="userSort" value="2">고객사</li>
+            <li><input th:attr="onclick=|moveToUserSortIdPage('3')|" type="radio" name="userSort" value="3">고객</li>
+            <li><input th:attr="onclick=|moveToUserSortIdPage('4')|" type="radio" name="userSort" value="4">직원</li>
+        </ul>
         <table class="user_table">
             <thead>
-                <tr></tr>
+                <tr>
+                    <th>이름</th>
+                    <th>ID</th>
+                    <th th:if="${param.userSortId != null and param.userSortId[0]=='2'}">대표자</th>
+                    <th th:if="${param.userSortId != null and param.userSortId[0]=='3'}">소속회사</th>
+                    <th th:if="${param.userSortId != null and param.userSortId[0]=='4'}">부서</th>
+                    <th>이메일</th>
+                    <th>승인여부</th>
+                </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr th:each="user : ${users}" th:attr="onclick=|moveToDetail(${user.userId})|">
+                    <td th:text="${user.userName}"></td>
+                    <td th:text="${user.userId}"></td>
+                    <td th:if="${param.userSortId != null and param.userSortId[0]=='2'}" th:text="${user.representative}"></td>
+                    <td th:if="${param.userSortId != null and param.userSortId[0]=='3'}" th:text="${user.company}"></td>
+                    <td th:if="${param.userSortId != null and param.userSortId[0]=='4'}" th:text="${user.department}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:if="${user.approval == null}"><a class="approval_button">승인하기</a></td>
+                    <td th:if="${user.approval != null}">승인</td>
+                </tr>
+            </tbody>
         </table>
         <th:block sec:authorize="hasAnyRole('1','2')"><a th:href="@{create}">생성</a></th:block>
+        <div class="page_num"><a th:each="num:${#numbers.sequence(1,page.count)}" th:text="${num}" th:attr="onclick=|moveToPage(${num})|"></a></div>
         </div>
+
+
     </section>
 </main>
 </html>

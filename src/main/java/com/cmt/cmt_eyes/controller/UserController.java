@@ -2,6 +2,7 @@ package com.cmt.cmt_eyes.controller;
 
 
 import com.cmt.cmt_eyes.dto.UserDto;
+import com.cmt.cmt_eyes.dto.UserListPagingDto;
 import com.cmt.cmt_eyes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,13 @@ public class UserController {
     public void login(UserDto userDto){   }
 
     @GetMapping("/management")
-    public void management(Model model){
-//        UserDto[] list = userService.allUser();
-//        model.addAttribute("users",list);
+    public void management(UserListPagingDto param, Model model){
+        if(param.getPage()==0){
+            param.setPage(1);
+        }
+        param.setLimit(3);
+        model.addAttribute("users",userService.selUserList(param));
+        model.addAttribute("page",userService.countPage(param));
     }
 
     @GetMapping("/create")
@@ -42,8 +47,11 @@ public class UserController {
     @PostMapping("/create")
     public String userCreate(Model model, @Validated(UserDto.UserCreateValidationGroup.class) UserDto userDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            userDto.setUserSortId(null);
             model.addAttribute("companys" , userService.selCompanyList());
+            return "user/create";
+        }
+        if(userService.selUser(userDto)!=null){
+            model.addAttribute("userIdError" , "사용할 수 없는 아이디입니다.");
             return "user/create";
         }
         userService.createUser(userDto);
@@ -73,7 +81,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/userList")
-    public UserDto[] selUserList(UserDto param){
+    public UserDto[] selUserList(UserListPagingDto param){
         return userService.selUserList(param);
     }
 

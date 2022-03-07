@@ -1,7 +1,9 @@
 package com.cmt.cmt_eyes.service;
 
+import com.cmt.cmt_eyes.dto.PageDto;
 import com.cmt.cmt_eyes.dto.UserDto;
 import com.cmt.cmt_eyes.PwReseted;
+import com.cmt.cmt_eyes.dto.UserListPagingDto;
 import com.cmt.cmt_eyes.repository.UserRepository;
 import com.cmt.cmt_eyes.security.AuthenticationInformation;
 import com.cmt.cmt_eyes.security.MySecurityUtils;
@@ -16,9 +18,10 @@ public class UserService {
     @Autowired MySecurityUtils mySecurityUtils;
     @Autowired PasswordEncoder passwordEncoder;
 
-//    public UserDto[] allUser(){
-//        return userRepository.allUser();
-//    }
+    public UserDto[] allUser(){
+        return userRepository.allUser();
+    }
+
     public int createUser(UserDto userDto){
         userDto.setApplicant(authenticationInformation.getLoginUser().getUserId());
         return userRepository.createUser(userDto);
@@ -28,8 +31,12 @@ public class UserService {
         return userRepository.selUser(param);
     }
 
-    public UserDto[] selUserList(UserDto param) {
+    public UserDto[] selUserList(UserListPagingDto param) {
         return userRepository.selUserList(param);
+    }
+
+    public PageDto countPage(UserListPagingDto param){
+        return userRepository.countPage(param);
     }
 
     public boolean approval(UserDto param) {

@@ -38,6 +38,7 @@
                             <td>
                                 <input type="text" th:field="*{userId}" placeholder="ID">
                                 <p class="err-txt" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
+                                <p class="err-txt" th:if="${userIdError != null}" th:text="${userIdError}"></p>
                             </td>
                         </tr>
                         <tr>
