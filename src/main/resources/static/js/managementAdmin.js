@@ -162,47 +162,37 @@
 // getUserListAjax('2');
 //
 //
-function moveToDetail(userId){
+// function moveToDetail(userId){
+//     console.log(userId);
+//     window.location.href=`/user?userId=${userId}`;
+// }
+
+function approvalUserAjax(userId , element){
     console.log(userId);
-    window.location.href=`/user?userId=${userId}`;
-}
-
-function moveToUserSortIdPage(userSortId){
-    let url = new URL(window.location.href);
-    if(userSortId==='all'){
-        window.location.href='management';
-        return;
-    }else if(url.searchParams.has('userSortId')){
-        url.searchParams.set('userSortId',userSortId);
-    }else{
-        url.searchParams.append('userSortId',userSortId);
+    let user={
+        userId:userId ,
     }
-    url.searchParams.set('page','1');
-    window.location.href=url.href;
+    fetch('/user/approval',{
+        method: 'PUT',
+        headers:{"Content-Type":"application/json; charset=utf-8"},
+        body: JSON.stringify(user)
+    }).then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
+            if(myJson==true){
+                resetPwAjax(userId, element);
+            }
+        })
 }
 
-function moveToPage(page){
-    const url = new URL(window.location.href);
-    if(url.searchParams.has('page')){
-        url.searchParams.set('page',page);
-    }else{
-        url.searchParams.append('page',page);
-    }
-    window.location.href=url.href;
-}
+function resetPwAjax(userId, element){
+    fetch(`/user/resetPw?userId=${userId}`,{
+        method: 'PUT',
+    })
+        .then(response => response.json())
+        .then(myJson => {
+            console.log(":: "+myJson)
 
-const userSortRadio = document.getElementsByName("userSort");
-function checkUserSortRadio(){
-    const url = new URL(window.location.href);
-    if(!url.searchParams.has('userSortId')){
-        userSortRadio[0].checked=true;
-    }else if(url.searchParams.get('userSortId')=='2'){
-        userSortRadio[1].checked=true;
-    }else if(url.searchParams.get('userSortId')=='3'){
-        userSortRadio[2].checked=true;
-    }else if(url.searchParams.get('userSortId')=='4'){
-        userSortRadio[3].checked=true;
-    }
+            element.parentNode.innerHTML='승인';
+        })
 }
-checkUserSortRadio();
-

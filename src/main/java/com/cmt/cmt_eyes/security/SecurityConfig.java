@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()// HTTP 요청 보안설정
                 .antMatchers("/user/login").permitAll()
-                .antMatchers("/user/create/**","/user").hasAnyRole("1","2")
+                .antMatchers("/user/create/**").hasAnyRole("1","2")
                 .anyRequest().authenticated();//권한제한++
 
         http.formLogin()

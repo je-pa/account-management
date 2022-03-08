@@ -40,7 +40,7 @@
                 </tbody>
             </table>
 
-            <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==2}">
+            <table sec:authorize="hasAnyRole('1','4')" th:if="${userDto.userSortId==2}">
                 <thead>
                     <th>고객사 정보</th>
                 </thead>
@@ -60,7 +60,7 @@
                 </tbody>
             </table>
 
-            <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==3}">
+            <table sec:authorize="hasAnyRole('1','4')" th:if="${userDto.userSortId==3}">
                 <thead>
                     <th>고객 정보</th>
                 </thead>
@@ -83,7 +83,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table sec:authorize="hasRole('1')" th:if="${userDto.userSortId==4}">
+            <table sec:authorize="hasAnyRole('1','4')" th:if="${userDto.userSortId==4}">
                 <thead>
                 <th>직원 정보</th>
                 </thead>
@@ -106,7 +106,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table sec:authorize="hasRole('2')" th:if="${userDto.userSortId==3}">
+            <table sec:authorize="hasAnyRole('2','3')" th:if="${userDto.userSortId==3}">
                 <thead>
 <!--                맞춰주기//////-->
                 <th>직원 정보</th>

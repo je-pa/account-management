@@ -32,6 +32,12 @@ public class UserService {
     }
 
     public UserDto[] selUserList(UserListPagingDto param) {
+        int loginSortId = authenticationInformation.getLoginUserSortId();
+        if(loginSortId == 2){
+            param.setCompany(authenticationInformation.getLoginUser().getUserName());
+        }else if(loginSortId == 3){
+            param.setCompany(authenticationInformation.getLoginUser().getCompany());
+        }
         return userRepository.selUserList(param);
     }
 

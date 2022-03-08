@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="~{layout :: layout(~{::title}, ~{::main},~{::link}, ~{})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+    <link rel="stylesheet" href="/css/my_page.css">
+</head>
+<main th:with="loginUser=${#authentication.getPrincipal().getUser()}">
+    <section>
+        <div>
+            <h3>마이페이지</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td class="userId" th:text="${loginUser.userId}"></td>
+                </tr>
+                <tr>
+                    <th>회사명</th>
+                    <td th:text="${loginUser.company}"></td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td th:text="${loginUser.userName}"></td>
+                </tr>
+                <tr>
+                    <th>e-mail</th>
+                    <td th:text="${loginUser.email}"></td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td><a class="pw_change" th:href="@{/user/changePw}">비밀번호 변경</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</html>

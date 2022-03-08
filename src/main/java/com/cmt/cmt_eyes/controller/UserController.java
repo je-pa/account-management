@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired UserService userService;
 
-
     @GetMapping("/login")
     public void login(UserDto userDto){   }
 
@@ -31,7 +30,14 @@ public class UserController {
         param.setLimit(3);
         model.addAttribute("users",userService.selUserList(param));
         model.addAttribute("page",userService.countPage(param));
+        model.addAttribute("companys" , userService.selCompanyList());
     }
+
+    @GetMapping("/myPage")
+    public String myPage(){ return "user/my_page"; }
+
+    @GetMapping("/changePw")
+    public String changePw(UserDto userDto){ return "user/changePw";}
 
     @GetMapping("/create")
     public void create(UserDto userDto, Model model){
@@ -55,7 +61,7 @@ public class UserController {
             return "user/create";
         }
         userService.createUser(userDto);
-        return "user/management";
+        return "redirect:management";
     }
 
     @PutMapping("/changePw")
@@ -64,13 +70,13 @@ public class UserController {
         String oldPw = httpServletRequest.getParameter("oldPw");
         String pw = userDto.getUserPw();
         if(pwChk==null||oldPw==null||pw==null||pwChk==""||oldPw==""||pw==""){
-            return "redirect:/?result=0";
+            return "redirect:/user/changePw?result=0";
         }
         if(!pwChk.equals(pw)){
-            return "redirect:/?result=1";
+            return "redirect:/user/changePw?result=1";
         }
         if(!userService.chkOldPw(oldPw)){
-            return "redirect:/?result=2";
+            return "redirect:/user/changePw?result=2";
         }
         if(bindingResult.hasErrors()){ //뭐가 틀렸는지
             return "user/changePw";

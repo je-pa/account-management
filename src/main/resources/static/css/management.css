@@ -18,3 +18,6 @@ main section div.table > a:hover{ cursor: pointer;}
 
 .radios { display: flex; gap: 5px;}
 .page_num { display: flex; gap: 10px; justify-content: center;}
+
+.filters{ display: flex; gap: 10px;}
+.filters span { padding-left: 30px;}

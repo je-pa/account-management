@@ -32,8 +32,11 @@
             <if test="userSortId != null and userSortId != ''">
                 user_sort_id = #{userSortId}
             </if>
+            <if test="userSortId != null and userSortId != '' and company != null and company != ''">
+                AND
+            </if>
             <if test="company != null and company != ''">
-                AND company = #{company}
+                company = #{company}
             </if>
         </if>
         ORDER BY reporting_date DESC
@@ -47,8 +50,11 @@
             <if test="userSortId != null and userSortId != ''">
                 user_sort_id = #{userSortId}
             </if>
+            <if test="userSortId != null and userSortId != '' and company != null and company != ''">
+                AND
+            </if>
             <if test="company != null and company != ''">
-                AND company = #{company}
+                company = #{company}
             </if>
         </if>
     </select>
