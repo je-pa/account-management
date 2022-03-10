@@ -4,7 +4,9 @@ console.log(userId.innerText);
 
 function resetPwAjax(userId){
     console.log(userId);
-    fetch(`/user/resetPw?userId=${userId}`)
+    fetch(`/user/resetPw?userId=${userId}`,{
+        method: 'PUT',
+    })
         .then(response => response.json())
         .then(myJson => {
             console.log(":: "+myJson)

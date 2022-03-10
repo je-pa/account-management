@@ -30,9 +30,8 @@
 // }
 
 const userSortRadio = document.getElementsByName("userSortId");
-// const moreInfos = document.querySelectorAll('.moreInfo');
-const moreInfoThs = document.querySelectorAll('.more_info_th');
-const moreInfoTrs = document.querySelectorAll('.more_info_tr');
+const moreInfoTable = document.querySelectorAll('.more_info');
+
 
 userSortRadio.forEach(e=>{
     e.addEventListener('click', ()=>{
@@ -42,43 +41,32 @@ userSortRadio.forEach(e=>{
 })
 
 function clickRadio(checkedUserSort){
-
     switch (checkedUserSort){
         case '2':
-            moreInfoThs[0].classList.remove('hide');
-            moreInfoThs[1].classList.add('hide');
-            moreInfoThs[2].classList.add('hide');
-
-            moreInfoTrs[0].classList.remove('hide');
-            moreInfoTrs[1].classList.add('hide');
-            moreInfoTrs[2].classList.add('hide');
-            moreInfoTrs[3].classList.add('hide');
-            moreInfoTrs[4].classList.remove('hide');
-            moreInfoTrs[5].classList.remove('hide');
+            moreInfoTable[0].classList.add('mode_company');
+            moreInfoTable[0].classList.remove('mode_customer');
+            moreInfoTable[0].classList.remove('mode_employee');
+            moreInfoTable[0].classList.remove('mode_none');
             break;
         case '3':
-            moreInfoThs[0].classList.add('hide');
-            moreInfoThs[1].classList.remove('hide');
-            moreInfoThs[2].classList.add('hide');
-
-            moreInfoTrs[0].classList.add('hide');
-            moreInfoTrs[1].classList.remove('hide');
-            moreInfoTrs[2].classList.remove('hide');
-            moreInfoTrs[3].classList.remove('hide');
-            moreInfoTrs[4].classList.remove('hide');
-            moreInfoTrs[5].classList.remove('hide');
+            moreInfoTable[0].classList.remove('mode_company');
+            moreInfoTable[0].classList.add('mode_customer');
+            moreInfoTable[0].classList.remove('mode_employee');
+            moreInfoTable[0].classList.remove('mode_none');
             break;
         case '4':
-            moreInfoThs[0].classList.add('hide');
-            moreInfoThs[1].classList.add('hide');
-            moreInfoThs[2].classList.remove('hide');
-
-            moreInfoTrs[0].classList.add('hide');
-            moreInfoTrs[1].classList.add('hide');
-            moreInfoTrs[2].classList.remove('hide');
-            moreInfoTrs[3].classList.remove('hide');
-            moreInfoTrs[4].classList.remove('hide');
-            moreInfoTrs[5].classList.remove('hide');
+            moreInfoTable[0].classList.remove('mode_company');
+            moreInfoTable[0].classList.remove('mode_customer');
+            moreInfoTable[0].classList.add('mode_employee');
+            moreInfoTable[0].classList.remove('mode_none');
             break;
     }
 }
+
+function checkedUserSortId(){
+    const checked = document.querySelector('input[name="userSortId"]:checked');
+    if(checked) {
+        clickRadio(checked.value);
+    }
+}
+checkedUserSortId();

@@ -19,5 +19,7 @@ main section div.table > a:hover{ cursor: pointer;}
 .radios { display: flex; gap: 5px;}
 .page_num { display: flex; gap: 10px; justify-content: center;}
 
-.filters{ display: flex; gap: 10px;}
+.filters{ display: flex; justify-content: space-between; align-items: center;}
+.filters_left{ display: flex; gap: 10px;align-items: center;}
+.filters form { display: flex; align-items: center;}
 .filters span { padding-left: 30px;}

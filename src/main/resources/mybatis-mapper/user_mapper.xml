@@ -27,36 +27,76 @@
     <select id="selUserList" resultType="UserDto">
         SELECT *
         FROM user
-        <if test="userSortId != null or company != null">
-        WHERE
+        <where>
             <if test="userSortId != null and userSortId != ''">
-                user_sort_id = #{userSortId}
-            </if>
-            <if test="userSortId != null and userSortId != '' and company != null and company != ''">
-                AND
+                AND user_sort_id = #{userSortId}
             </if>
             <if test="company != null and company != ''">
-                company = #{company}
+                AND company = #{company}
             </if>
-        </if>
+            <if test="search != null and search != ''">
+                AND (
+                user_name REGEXP #{search}
+                OR
+                user_id REGEXP #{search}
+                OR
+                email REGEXP #{search}
+                <if test="loginUserSort == 'admin' or loginUserSort == 'employee'">
+                    <if test="userSortId != null and userSortId == 2">
+                        OR representative REGEXP #{search}
+                    </if>
+                    <if test="userSortId != null and userSortId == 3">
+                        OR company REGEXP #{search}
+                    </if>
+                    <if test="userSortId != null and userSortId == 4">
+                        OR department REGEXP #{search}
+                    </if>
+                </if>
+                <if test="loginUserSort == 'customer' or loginUserSort == 'company'">
+                    OR department REGEXP #{search}
+                </if>
+                )
+            </if>
+        </where>
         ORDER BY reporting_date DESC
         LIMIT #{startIdx}, #{limit}
     </select>
     <select id="countPage" resultType="PageDto">
         SELECT CEIL(COUNT(user_id)/#{limit}) AS count
         FROM user
-        <if test="userSortId != null or company != null">
-            WHERE
+        <where>
             <if test="userSortId != null and userSortId != ''">
-                user_sort_id = #{userSortId}
-            </if>
-            <if test="userSortId != null and userSortId != '' and company != null and company != ''">
-                AND
+                AND user_sort_id = #{userSortId}
             </if>
             <if test="company != null and company != ''">
-                company = #{company}
+                AND company = #{company}
             </if>
-        </if>
+            <if test="search != null and search != ''">
+                AND (
+                    user_name REGEXP #{search}
+                    OR
+                    user_id REGEXP #{search}
+                    OR
+                    email REGEXP #{search}
+                    <if test="loginUserSort == 'admin' or loginUserSort == 'employee'">
+                        <if test="userSortId != null and userSortId == 2">
+                            OR representative REGEXP #{search}
+                        </if>
+                        <if test="userSortId != null and userSortId == 3">
+                            OR company REGEXP #{search}
+                        </if>
+                        <if test="userSortId != null and userSortId == 4">
+                            OR department REGEXP #{search}
+                        </if>
+                    </if>
+                    <if test="loginUserSort == 'customer' or loginUserSort == 'company'">
+                        <if test="userSortId != null and userSortId == 4">
+                            OR department REGEXP #{search}
+                        </if>
+                    </if>
+                    )
+            </if>
+        </where>
     </select>
     <select id="selCompanyList" resultType="UserDto">
         SELECT user_name , user_id

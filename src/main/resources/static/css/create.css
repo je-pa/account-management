@@ -15,3 +15,20 @@ main section table select {height: 35px; min-width: 92px; background: #D9D9D9; b
 tbody th { width: 18%; text-align: right; padding-right: 28px;}
 tbody tr{ height: 55px; border-bottom: 1px solid black; text-align: left;}
 tbody td{ display: flex; gap: 10px; height: 55px; align-items: center;}
+
+.more_info.mode_none { display: none;}
+
+.more_info.mode_company .more_info_th:nth-child(2){ display: none; }
+.more_info.mode_company .more_info_th:nth-child(3){ display: none; }
+.more_info.mode_company .more_info_tr:nth-child(2){ display: none; }
+.more_info.mode_company .more_info_tr:nth-child(3){ display: none; }
+.more_info.mode_company .more_info_tr:nth-child(4){ display: none; }
+
+.mode_customer .more_info_th:nth-child(1){ display: none; }
+.mode_customer .more_info_th:nth-child(3){ display: none; }
+.mode_customer .more_info_tr:nth-child(1){ display: none; }
+
+.mode_employee .more_info_th:nth-child(1){ display: none; }
+.mode_employee .more_info_th:nth-child(2){ display: none; }
+.mode_employee .more_info_tr:nth-child(1){ display: none; }
+.mode_employee .more_info_tr:nth-child(2){ display: none; }

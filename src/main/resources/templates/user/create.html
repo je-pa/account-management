@@ -57,20 +57,20 @@
                         </tr>
                     </tbody>
                 </table>
-                <table sec:authorize="hasRole('1')">
+                <table sec:authorize="hasRole('1')" class="more_info mode_none">
                     <thead>
-                    <th class="more_info_th hide">고객사 정보</th>
-                    <th class="more_info_th hide">고객 정보</th>
-                    <th class="more_info_th hide">직원 정보</th>
+                    <th class="more_info_th">고객사 정보</th>
+                    <th class="more_info_th">고객 정보</th>
+                    <th class="more_info_th">직원 정보</th>
                     </thead>
                     <tbody>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>대표자</th>
                         <td>
                             <input type="text" th:field="*{representative}" placeholder="대표자">
                         </td>
                     </tr>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>소속회사</th>
                         <td>
                             <select th:field="*{company}">
@@ -79,25 +79,25 @@
                             </select>
                         </td>
                     </tr>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>부서</th>
                         <td>
                             <input type="text" th:field="*{department}" placeholder="부서">
                         </td>
                     </tr>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>직급</th>
                         <td>
                             <input type="text" th:field="*{position}" placeholder="직급">
                         </td>
                     </tr>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>연락처</th>
                         <td>
                             <input type="text" th:field="*{contact}" placeholder="연락처">
                         </td>
                     </tr>
-                    <tr class="more_info_tr hide">
+                    <tr class="more_info_tr">
                         <th>비고</th>
                         <td>
                             <input type="text" th:field="*{note}" placeholder="비고">

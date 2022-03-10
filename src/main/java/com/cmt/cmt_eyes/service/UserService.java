@@ -24,6 +24,9 @@ public class UserService {
 
     public int createUser(UserDto userDto){
         userDto.setApplicant(authenticationInformation.getLoginUser().getUserId());
+        if(userDto.getUserSortId()==2){
+            userDto.setCompany(userDto.getUserName());
+        }
         return userRepository.createUser(userDto);
     }
 
@@ -35,14 +38,25 @@ public class UserService {
         int loginSortId = authenticationInformation.getLoginUserSortId();
         if(loginSortId == 2){
             param.setCompany(authenticationInformation.getLoginUser().getUserName());
+            param.setUserSortId(3);
+            param.setLoginUserSort("company");
         }else if(loginSortId == 3){
             param.setCompany(authenticationInformation.getLoginUser().getCompany());
+            param.setLoginUserSort("customer");
+        }else if(loginSortId == 1){
+            param.setLoginUserSort("admin");
+        }else if(loginSortId == 4){
+            param.setLoginUserSort("employee");
         }
         return userRepository.selUserList(param);
     }
 
     public PageDto countPage(UserListPagingDto param){
-        return userRepository.countPage(param);
+        PageDto pageDto = userRepository.countPage(param);
+        if(pageDto.getCount()==0){
+            pageDto.setCount(1);
+        }
+        return pageDto;
     }
 
     public boolean approval(UserDto param) {

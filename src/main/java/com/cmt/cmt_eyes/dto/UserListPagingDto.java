@@ -7,12 +7,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserListPagingDto {
+public class UserListPagingDto extends UserDto{
     private int page;
     private int limit;
 
-    private Integer userSortId;
-    private String company;
+    private String search;
+
+    private String loginUserSort;
 
     public int getStartIdx(){
         return limit *(page-1);
