@@ -11,6 +11,7 @@
     <script defer src="/js/management.js" type="text/javascript" charset="utf-8"></script>
     <script sec:authorize="hasRole('1')" defer src="/js/managementAdmin.js" type="text/javascript" charset="utf-8"></script>
     <script sec:authorize="hasRole('2')" defer src="/js/managementCompany.js" type="text/javascript" charset="utf-8"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <main>
     <section>
@@ -21,18 +22,24 @@
                   th:data-user-name="${auth.userName}"
         ></span>
         <br>
-        <div sec:authorize="hasAnyRole('1','4')" class="filters">
-            <ul class="radios">
-                <li><input th:attr="onclick=|moveToUserSortIdPage('all')|" type="radio" name="userSort">전체</li>
-                <li><input th:attr="onclick=|moveToUserSortIdPage('2')|" type="radio" name="userSort" value="2">고객사</li>
-                <li><input th:attr="onclick=|moveToUserSortIdPage('3')|" type="radio" name="userSort" value="3">고객</li>
-                <li><input th:attr="onclick=|moveToUserSortIdPage('4')|" type="radio" name="userSort" value="4">직원</li>
-            </ul>
-            <span>고객사 : </span>
-            <select class="company_select" onchange="changeSelect(this)">
-                <option selected value="">전체</option>
-                <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
-            </select>
+        <div class="filters">
+            <div class="filters_left" sec:authorize="hasAnyRole('1','4')">
+                <ul class="radios">
+                    <li><input th:attr="onclick=|moveToUserSortIdPage('all')|" type="radio" name="userSort">전체</li>
+                    <li><input th:attr="onclick=|moveToUserSortIdPage('2')|" type="radio" name="userSort" value="2">고객사</li>
+                    <li><input th:attr="onclick=|moveToUserSortIdPage('3')|" type="radio" name="userSort" value="3">고객</li>
+                    <li><input th:attr="onclick=|moveToUserSortIdPage('4')|" type="radio" name="userSort" value="4">직원</li>
+                </ul>
+                <span>고객사 : </span>
+                <select class="company_select" onchange="changeSelect(this)">
+                    <option selected value="all">전체</option>
+                    <option th:each="company : ${companys}" th:text="${company.userName}" th:value="${company.userName}"></option>
+                </select>
+            </div>
+            <form class="searchForm" onsubmit="return search(this);">
+                <input type="text" name = "searchWord" placeholder="검색어를 입력해주세요." required>
+                <input type="submit" value="검색">
+            </form>
         </div>
         <table sec:authorize="hasAnyRole('1','4')" class="user_table">
             <thead>
