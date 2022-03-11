@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserListPagingDto extends UserDto{
-    private int page;
+    private int page; //참조형//////
     private int limit;
 
     private String search;

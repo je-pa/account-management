@@ -27,7 +27,7 @@ public class UserController {
         if(param.getPage()==0){
             param.setPage(1);
         }
-        param.setLimit(5);
+        param.setLimit(10);
         model.addAttribute("users",userService.selUserList(param));
         model.addAttribute("page",userService.countPage(param));
         model.addAttribute("companys" , userService.selCompanyList());
