@@ -53,8 +53,8 @@ public class UserService {
 
     public PageDto countPage(UserListPagingDto param){
         PageDto pageDto = userRepository.countPage(param);
-        if(pageDto.getCount()==0){
-            pageDto.setCount(1);
+        if(pageDto.getPageCount()==0){
+            pageDto.setPageCount(1);
         }
         return pageDto;
     }

@@ -1,6 +1,7 @@
 package com.cmt.cmt_eyes.controller;
 
 
+import com.cmt.cmt_eyes.dto.PageDto;
 import com.cmt.cmt_eyes.dto.UserDto;
 import com.cmt.cmt_eyes.dto.UserListPagingDto;
 import com.cmt.cmt_eyes.service.UserService;
@@ -27,9 +28,11 @@ public class UserController {
         if(param.getPage()==0){
             param.setPage(1);
         }
-        param.setLimit(10);
+        param.setLimit(2);
         model.addAttribute("users",userService.selUserList(param));
-        model.addAttribute("page",userService.countPage(param));
+        PageDto pageDto = userService.countPage(param);
+        pageDto.setCurrentPage(param.getPage());
+        model.addAttribute("page",pageDto);
         model.addAttribute("companys" , userService.selCompanyList());
     }
 

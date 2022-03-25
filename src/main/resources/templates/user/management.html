@@ -91,7 +91,12 @@
             </tbody>
         </table>
         <th:block sec:authorize="hasAnyRole('1','2')"><a th:href="@{create}">생성</a></th:block>
-        <div class="page_num"><a th:each="num:${#numbers.sequence(1,page.count)}" th:text="${num}" th:attr="onclick=|moveToPage(${num})|"></a></div>
+
+            <div class="page_num">
+                <a th:if="${page.currentFirstCountPage>10}" th:attr="onclick=|moveToPage(${page.currentFirstCountPage-10})|"> < </a>
+                <a th:each="num:${#numbers.sequence(page.currentFirstCountPage,page.currentLastCountPage)}" th:text="${num}" th:attr="onclick=|moveToPage(${num})|"></a>
+                <a th:if="${page.currentLastCountPage<page.pageCount}" th:attr="onclick=|moveToPage(${page.currentLastCountPage+1})|"> > </a>
+            </div>
         </div>
     </section>
 </main>
